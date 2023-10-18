@@ -41,7 +41,7 @@ router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
 })
 
 //DELETE ALL PRODUCTS
-router.delete("/deleteall", verifyTokenAndAdmin, async (req, res) => {
+router.delete("/", verifyTokenAndAdmin, async (req, res) => {
     try {
         await Product.deleteMany({})
         res.status(200).json("All Products has been deleted")
