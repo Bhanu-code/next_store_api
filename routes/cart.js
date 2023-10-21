@@ -3,7 +3,7 @@ const Cart = require('../models/Cart')
 const { verifyToken, verifyTokenAndAuth, verifyTokenAndAdmin } = require('./verifyToken')
 
 
-//CREATE
+//CREATE CART
 
 router.post("/", verifyToken, async (req, res) => {
     const newCart = new Cart(req.body);
