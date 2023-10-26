@@ -31,7 +31,7 @@ const authRoute = require("./routes/auth")
 const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
-const paymentRoute = require("./routes/payment")
+const paymentRoute = require("./routes/stripe")
 
 //specifying routes
 app.use("/api/users", userRoute)

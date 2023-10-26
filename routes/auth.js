@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/User')
 const Cryptojs = require('crypto-js')
 const jwt = require("jsonwebtoken")
+const {verifyToken} = require('./verifyToken')
 
 //REGISTER
 router.post("/register", async(req, res)=>{
@@ -49,6 +50,8 @@ router.post('/login', async(req, res)=>{
         res.status(500).json(err)
     }
 })
+
+
 
 
 module.exports = router;

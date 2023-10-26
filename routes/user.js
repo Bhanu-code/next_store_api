@@ -80,4 +80,20 @@ router.get('/stats', verifyTokenAndAdmin, async(req, res)=>{
     }
 })
 
+//LOGOUT
+
+router.post('/logout', verifyToken, (req, res)=>{
+    try{
+        const token = req.headers.token;
+        // console.log(token)
+        const newtoken = req.headers.filter((t)=>t !== token)
+
+    }catch(error){
+        res.status(401).json("inavlid token")
+    }
+    
+
+    res.status(200).json("Logged out successfully")
+})
+
 module.exports = router
