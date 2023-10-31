@@ -82,12 +82,10 @@ router.get('/stats', verifyTokenAndAdmin, async(req, res)=>{
 
 //LOGOUT
 
-router.post('/logout', verifyToken, (req, res)=>{
+router.get('/logout', verifyToken, (req, res)=>{
     try{
-        const token = req.headers.token;
-        // console.log(token)
-        const newtoken = req.headers.filter((t)=>t !== token)
-
+        res.clearCookie('jwt')
+        req.user.save()
     }catch(error){
         res.status(401).json("inavlid token")
     }
