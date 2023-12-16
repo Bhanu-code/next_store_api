@@ -1,9 +1,11 @@
 const express = require('express')
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 //using json with express
 app.use(express.json());
+app.use(cookieParser());
 
 
 const cors = require('cors')
@@ -22,7 +24,8 @@ mongoose.connect(process.env.MONGO_URL).then(()=>{
 })
 
 // enabling cors
-app.use(cors())
+app.use(cors());
+
 
 
 //importing routes
@@ -32,6 +35,7 @@ const productRoute = require("./routes/product")
 const cartRoute = require("./routes/cart")
 const orderRoute = require("./routes/order")
 const paymentRoute = require("./routes/stripe")
+
 
 //specifying routes
 app.use("/api/users", userRoute)

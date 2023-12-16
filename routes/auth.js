@@ -41,10 +41,11 @@ router.post("/register", async (req, res) => {
 //LOGIN
 router.post('/login', async (req, res) => {
     try {
-        const user = await User.findOne({ username: req.body.username })
-        !user && res.status(401).json("Wrong credendtials")
+        const user = await User.findOne({ username: req.body.username });
 
-        const hashedPassword = Cryptojs.AES.decrypt(user.password, process.env.SECRET_PHRASE)
+        !user && res.status(401).json("Wrong credendtials");
+
+        const hashedPassword = Cryptojs.AES.decrypt(user.password, process.env.SECRET_PHRASE);
         const Originalpassword = hashedPassword.toString(Cryptojs.enc.Utf8);
 
         Originalpassword !== req.body.password &&
@@ -62,11 +63,18 @@ router.post('/login', async (req, res) => {
 
         const { password, ...others } = user._doc;
 
-        res.status(200).json({ ...others, accessToken })
+        res.cookie("jwt", accessToken, { maxAge: 3 * 24 * 60 * 60 * 1000 });
+        res.status(200).json({ others })
 
     } catch (err) {
         res.status(500).json(err)
     }
+
+    //LOGOUT
+    router.get("/logout", (req, res) => {
+        res.cookie("jwt", " ", { maxAge: 1000 });
+        res.status(200).json("Successfully logged out");
+    })
 
 })
 
