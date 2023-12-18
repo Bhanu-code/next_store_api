@@ -63,18 +63,13 @@ router.post('/login', async (req, res) => {
 
         const { password, ...others } = user._doc;
 
-        // res.cookie("jwt", accessToken);
         res.status(200).json({ ...others, accessToken});
 
     } catch (err) {
         res.status(500).json(err)
     }
 
-    //LOGOUT
-    router.get("/logout", (req, res) => {
-        // res.cookie("jwt", " ", { maxAge: 1000 });
-        res.status(200).json("Successfully logged out");
-    })
+ 
 
 })
 
